@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>joshdrama</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+        <style>
+            a {
+                color: rgb(200, 209, 209);
+            }
+            p {
+                font-family: Roboto, Arial;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+            hr{
+                border: 1px solid rgb(88, 86, 86);
+            }
+            
+            .thumbnail {
+               width: 100%;
+               cursor: pointer;
+               transition: opacity 0.6s ;
+               border-radius: 24px;
+              
+            }
+            .thumbnail:hover {
+                opacity: 0.4;
+                box-shadow: 0 0 90px #000000;
+            }
+            .thumbnail:active {
+                opacity: 0.2;
+                
+            }
+            
+
+            .search {
+                border-radius: 2;
+                background-color: rgb(16, 13, 13);
+                text-align: center;
+                border: 800;
+                display:inline-block;
+                font-family: Roboto;
+                font-size: 16px;
+                display: inline-block;
+                margin-top: 13px;
+                float: right;
+                margin-right: 20px;
+                border-radius: 18px;
+                width: 200px;
+                height: 30px;
+                
+                
+            }  
+            .searchgrid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                background: linear-gradient(25deg, black, rgb(57, 10, 10));
+                margin: 12px;
+                border-radius: 22px;
+                
+                
+          
+            }
+
+            
+  .search:hover, .search:focus {
+    border: 1.5px solid #aeb4b4;
+    background-color: rgb(168, 157, 157);
+    transition: .4s ease;
+    
+  }
+
+
+            .channel-pic {
+                display: inline-block;
+                width: 50px;
+                vertical-align: top;
+
+            }
+
+            .vid-info {
+                display: inline-block;
+                width: 200px;
+                margin: 16px;
+            }
+            .vid-info-grid{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                align-items:center;
+
+            }
+            .video-grid{
+                margin: 14px;
+            }
+
+            .profile-pic {
+                width: 70%;
+                border-radius: 50px;
+               
+                margin-bottom: 0px;
+                margin: 9px;
+
+
+            }
+
+            .title {
+                color: aliceblue;
+                margin-top: 0px;
+                font-size: 14px;
+                font-weight: 500;
+                line-break: 20px;
+                margin-bottom: 12px;       
+                         
+            }
+           
+            
+            .thumbnail-row {
+                margin-bottom: 10px;
+            }
+
+            .author, .views {
+                font-size: 12px;
+                color:rgb(170, 170, 170) ;
+            }
+            .author {
+                margin-bottom: 4px;
+            }
+
+            .video-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                column-gap: 25px;
+                row-gap: 30px;
+
+            }
+
+            .logo 
+            {
+               
+                display: inline-block;
+                border: 30px;
+                color: rgb(206, 194, 194);
+                background-color: rgba(123, 123, 123, 0.89);
+                padding: 13px;
+                border-radius: 18px;
+                font-size: large;
+                font-weight: 300;
+                font-style: italic;
+                margin-bottom: 20px;
+                margin-bottom: 8px;
+                margin-left: 10px;
+                margin-top: 7px;
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+            }
+
+
+
+
+      .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #25292b;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            transform: scale(0);
+            transition: 2s ease;
+            opacity: 0.6;
+          }
+          .thumbnail-row:hover .overlay {
+            transform: scale(1);
+          }
+          .imgdis {
+            margin-top: auto;
+            color: white;
+            font-size: 17px;
+            font-style: italic;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            opacity: 100;
+            border-radius: 20%;
+            
+          }
+          .thumbnail-row {
+            position: relative;
+            width: 100%;
+          }
+
+          img{
+            border-radius: 2%;
+            object-fit: cover;
+          }
+          .sp{
+            margin: 23px;
+          }
+
+
+
+
+          .slider {
+        width: 500px;
+        height: 300px;
+        background-color: rgb(255, 77, 0);
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 90px;
+        text-align: center;
+        overflow: hidden;
+        border-radius: 9px;
+        z-index: 5;
+      }
+      .slider:hover {
+        opacity: 0.7;
+        transition: .4s ease;
+
+      }
+      .image-container {
+        width: 1500px;
+        background-color: pink;
+        height: 300px;
+        clear: both;
+        position: relative;
+        -webkit-transition: left 2s;
+        -moz-transition: left 2s;
+        -o-transition: left 2s;
+        transition: left 2s;
+      }
+      .slide {
+        float: left;
+        margin: 0px;
+        padding: 0px;
+        position: relative;
+      }
+      #slide-1:target ~ .image-container {
+        left: 0px;
+      }
+      #slide-2:target ~ .image-container {
+        left: -500px;
+      }
+      #slide-3:target ~ .image-container {
+        left: -1000px;
+      }
+      .buttons {
+        position: relative;
+        top: -20px;
+      }
+      .buttons a {
+        display: inline-block;
+        height: 15px;
+        width: 15px;
+        border-radius: 50px;
+        background-color: rgb(255, 255, 255);
+      }
+      .line{
+        background-color: rgb(24, 61, 61);
+    }
+    .lineup{
+        background-color: rgb(24, 61, 61);
+        margin-bottom: 40px;
+        
+    }
+    .heading{
+        color: #aeb4b4;
+        padding: 0px;
+        margin: 0px;
+        margin-top: 10px;
+        margin-left: 75px;
+        
+    }
+    .jflix{
+        color: red;
+    }
+
+    .ending{
+        margin: 200px;
+    }
+    .pop{
+        margin-left: 685px;
+        margin-bottom: 0px;
+        display: inline-block;
+        border-radius: 10px;
+        padding: 12px;
+        color: #aeb4b4;
+        cursor: pointer;
+        
+    }
+    .pop:hover{
+        transition: .9s ease;
+        color: #25292b;
+        opacity: .3;
+    }
+
+    a:hover{
+        color: #c496b3b0;
+        transition: .5s ease;
+    }
+    body{
+        background: linear-gradient(78deg,#0b0245,#282727); 
+        animation: mymove 5s infinite;
+    }
+    @keyframes mymove {
+  from {background-color: rgb(102, 23, 177);}
+  to {background-color: rgb(37, 37, 56);}
+}
+div.vidioall{
+  
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 17px;
+    background-color: #262836;
+    z-index: 5;
+  
+}
+
+
+
+
+
+
+
+
+.pq {
+                font-family: "poppins", sans-serif;
+                padding-left: 2px;
+                padding-right: 2px;
+                
+            }
+            
+            .container{
+                background-color: rgb(47, 47, 79);
+                display: grid;
+                grid-template-columns: 3fr 1fr;
+                
+                position: fixed;
+                width: 100%; 
+                z-index: 20;
+                top: 0%;
+                box-shadow: 0 4px 8px 0 rgba(46, 43, 43, 0.262), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                
+                
+            }
+            .als{
+                display: grid;
+                grid-template-columns: .3fr .3fr .3fr;
+                align-items: center;
+                
+                
+            }
+            .josh{
+                padding: 10px;
+                margin-left: 60px;
+
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                
+                
+            }
+
+
+
+
+
+
+            
+            
+
+  </style>
+        
+    </head>
+
+<body >
+
+
+       
+    <div class="container">
+        <div class="josh"> <h1 style="color: rgb(157, 157, 157);">Joshwa </h1> </div>
+        <div class="als">
+            <div> <p style="color: rgb(157, 157, 157);">about </p> </div>
+            <div> <p style="color: rgb(157, 157, 157);">login </p> </div>
+            <div> <p style="color: rgb(156, 156, 156);">search </p> </div>
+        </div>
+    </div>
+    
+
+    <div class="slider">
+        <span id="slide-1"></span>
+        <span id="slide-2"></span>
+        <span id="slide-3"></span>
+  
+  
+        <div class="image-container">
+          <a href="http://fdrama.net/watch-online/hotel-del-luna/episode-1"><img src="hdl4.jpg" class="slide" width="500" height="300" />
+  </a>
+          <a href="">        <img src="home.jpg" class="slide" width="500" height="300" />
+  </a>
+          <a href="">        <img src="ml2.jpg" class="slide" width="500" height="300" />
+  </a>
+        </div>
+  
+        
+        <div class="buttons">
+          <a href="#slide-1"></a>
+          <a href="#slide-2"></a>
+          <a href="#slide-3"></a>
+        </div>
+      </div>
+      <div><h1 class="pop">Popular</h1></div>
+
+
+
+    <div class="sp">
+        <hr class="line">
+        
+
+    </div>  
+   
+
+    <div class="video-grid">
+
+        <div class="vidioall">
+
+            <div class="thumbnail-row">
+                 <img class="thumbnail" src="goblin.jpg" alt="img" >
+            
+
+
+
+            <div class="overlay"> <p class="imgdis">Kim Shin (Gong Yoo) is a goblin who is also a protector of souls. He lives together with an amnesiac grim reaper (Lee Dong Wook) who is in charge of taking deceased souls. Together the two of them sees the dead off into the afterlife. Meanwhile, Ji Eun Tak (Kim Go Eun) is a high school student who despite her painful reality, remains optimistic. She ends up falling in love with the goblin. Kim Sun (Yoo In Na) is an owner of a chicken shop; a bright and attractive girl who is loved by all men.
+
+                    </p>
+                </div>
+            </div>
+
+
+
+    
+            
+    
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+    
+    
+                <div class="vid-info">
+                    <p class="title">
+                        <a class="a" href="http://fdrama.net/watch-online/goblin/episode-1">goblin</a>
+                    </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">1.8M views 1 year ago</p>
+                </div>
+                
+               
+            </div> 
+    
+        </div>
+
+        <div class="vidioall">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="sq2.jpg" alt="img" >
+                <div class="overlay"> <p class="imgdis">"Squid Game" depicts a story of people who decide to become the players of a mysterious survival game that has a whopping 40-million-dollar prize at stake. Ki Hoon, seems defeated by life after being fired from his job. He decides to join the survival game to win prize money. Sang Woo, is Ki Hoon’s childhood friend and he also joins the game as he gets in trouble at work despite all the hard work he has done to be where he is at now.
+
+                    "Squid Game" is the name of a street game Ki Hoon and Sang Woo played together when they were young. It’s quite a physical game that only ends when there’s a final winner, much like the survival game they play now. It’s named as such because players are to draw different geometric shapes on the ground, which, as a whole, look like a squid.
+
+                </p>
+            </div>
+            </div>
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/squid-game/episode-1">Squid Game</a>
+                        </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">1.5M views 1 year ago</p>
+                </div>
+            </div> 
+        </div>
+    
+        <div class="vidioall">
+    
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="okey.jpg" alt="img" >
+                <div class="overlay"> <p class="imgdis">The story of a community health worker at a psychiatric ward who lives on 1.8 million won (approximately $1,520) a month and a storybook writer suffering from an antisocial personality disorder. A man who denies love and a woman who doesn’t know love defy fate and fall in love, finding their souls and identities in the process.
+
+                    Moon Kang Tae is a community health worker at a psychiatric ward who was blessed with everything including a great body, smarts, ability to sympathize with others, patience, ability to react quickly, stamina, and more. Meanwhile, Ko Moon Young is a popular writer of children’s literature, but she is extremely selfish, arrogant, and rude.
+                </p>
+            </div>
+            </div>
+
+
+
+
+            
+    
+    
+    
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                    
+                </div>
+    
+    
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/its-okay-to-not-be-okay/episode-1">Its okey to not be okey</a>
+                    </p>
+                        <p class="author">Episode 16 </p>
+                        <p class="views">3.4M views 1 year ago</p>
+                </div>
+    
+               
+            </div> 
+    
+        </div>
+    
+    
+    
+    
+    
+    
+        <div class="vidioall">
+    
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="ml2.jpg" alt="img" >
+                <div class="overlay"> <p class="imgdis">This drama is based on Chinese novel “Bu Bu Jing Xin” by Tong Hua which was originally published online in 2005 on Jinjiang Original Network. The novel also adapted into the chinese television series “Scarlet Heart” which was aired in Hunan Broadcasting System (HBS) from 2011-Sep-10 to 2011-Sep-29 and also “Scarlet Heart 2” which was aired in Zhejiang STV (ZJTV) from 2014-Apr-22 to 2014-May-07.
+                    
+                    The story set up in the early of Goryeo regime. Hae Soo (IU), a 25 year old girl from modern era got transported back to Goryeo dynasty and got trapped in the conflicts and struggles between princes of Wang’s House. There, she falls in love with Wang So (Lee Joon Ki) who makes other people tremble with fear.
+
+                </p>
+            </div>
+    
+            </div>
+    
+    
+    
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                    
+                </div>
+    
+    
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/moon-lovers%E2%80%93scarlet-heart-ryeo/episode-1">Moon Lovers: Scarlet Heart Ryeo</a>
+                    </p>
+                        <p class="author"> Episode 20</p>
+                        <p class="views">2.8M views 1 year ago</p>
+                </div>
+    
+               
+            </div> 
+    
+        </div>
+    
+    
+    
+        <div class="vidioall">
+    
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="startup.jpg" alt="img" >
+                <div class="overlay"> <p class="imgdis">This drama is about a woman who dreams of becoming an entrepreneur like Steve Jobs, a man of natural science who becomes her first love, and another man who has to make that man look wonderful.
+
+                    Seo Dal Mi (Bae Suzy) is a second-generation heiress who drops out of college to start her own company and be as successful as Steve Jobs. She also gives up her privileges and takes various jobs to raise the money she can use as capital.
+                    
+                    Meanwhile, Nam Do San (Nam Joo Hyuk) is the founder of Samsan Tech. He is excellent with mathematics. He started Samsan Tech two years ago, but the company is not doing well. Somehow, Nam Do San becomes Seo Dal Mi’s first love. They cheer each others start and growth.
+                    
+                </p>
+            </div>
+            </div>
+    
+    
+    
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                    
+                </div>
+    
+    
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/start-up/episode-1">start-up</a>
+                    </p>
+                        <p class="author">Episode 16 </p>
+                        <p class="views">2.1M views 1 year ago</p>
+                </div>
+    
+               
+            </div> 
+    
+        </div>
+    
+    
+    
+    
+    
+    
+        <div class="vidioall">
+    
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="yumicells2.webp" alt="img" >
+                <div class="overlay"> <p class="imgdis">After suffering a painful breakup, Yu Mi’s love cells have shut down completely, but a chance meeting with the emotionally stunted game designer, Goo Woong, changes all of that. Waking up a number of each other’s cells, Yu Mi and Goo Woong find themselves drawing closer, but even with the revival of their long-dormant love cells, their relationship wasn’t destined to last.
+
+                    Now a much wiser and more mature individual, Yu Mi finds herself willing to take on a set of challenges after an unexpected source of inspiration ignites her internal fire. Inspired by her co-worker, Bobby Yoo, Yu Mi and her hard-working cells set out to make all of her dreams come true.
+                    
+
+                </p>
+            </div>
+    
+            </div>
+    
+    
+    
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+    
+    
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/yumis-cells-2/episode-1">Yumi cells- 2</a>
+                        </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">1.5M views 1 year ago</p>
+                </div>
+    
+               
+            </div> 
+    
+        </div>
+
+
+
+
+
+        <div class="vidioall">
+    
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="wts.jpg" alt="img" >
+                <div class="overlay"> <p class="imgdis">This drama is based on the same name novel by (정경윤 / Jung Kyung-Yoon) which was first published on 2013-April-3 by Gaha. The Webcomic by Kim Young Mi which was first published on 2016 via kakao.com also based on the novel of same name.
+
+                    It’s revolves around a cocky vice president who is narcissist and his highly capable secretary of nine years.
+
+                </p>
+            </div>
+    
+            </div>
+    
+    
+    
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+    
+    
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/whats-wrong-with-secretary-kim/episode-1">whats-wrong-with-secretary-kim</a>
+                        </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">1.5M views 1 year ago</p>
+                </div>
+    
+               
+            </div> 
+    
+        </div>
+
+
+
+
+        <div class="vidioall">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="Sisyphus-_The_Myth-TP01.jpg" alt="img" >
+                <div class="overlay"> <p class="imgdis">This drama tells the story of Han Tae Sul (Cho Seung Woo), a genius engineer who tries to uncover the truth behind his older brother’s death, and Kang Seo Hae (Park Shin Hye), an elite warrior who travels back in time to help him.
+
+                    Han Tae Sul, a co-founder of Quantum and Time, is a genius engineer with the highest level of coding skills and outstanding looks that outweighs his engineer fashion sense. Due to his innovative achievements, Quantum and Time is a world-class company, dubbed as "The Miracle of South Korea's Engineering Industry". In reality, Tae Sul has caused his company's stocks to constantly fluctuate after the death of his brother ten years ago. One day, after witnessing the unbelievable truth of his brother's death, he sets off on a dangerous journey.
+                    
+                    
+                </p>
+            </div>
+            </div>
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/sisyphus-the-myth/episode-1">Sisyphus: The Myth</a>
+                        </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">1.5M views 1 year ago</p>
+                </div>
+            </div> 
+        </div>
+
+
+
+
+
+
+
+
+        <div class="vidioall">
+    
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="ath.webp" alt="img" >
+                <div class="overlay"> <p class="imgdis">Eun Som is a cursed child born in Blue Stone Village under an ominous sign. He later becomes the conqueror of Asadal, capital of Gojoseon, taking it from city-state to empire. Ta Gon is a war hero among the Saenyeok Tribe and master of strategy. He is ambitious and aims to become the first King of Asadal. Tan Ya is a woman born under a cursed sign who overcomes adversity to become the first female politician of Asadal. She is Eun Som's first love. Tae Ha is the last surviving Neoantal, a race different from humans, as well as the first Empress of Asadal.
+
+                </p>
+            </div>
+    
+            </div>
+    
+    
+    
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+    
+    
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/arthdal-chronicles/episode-1">arthdal-chronicles</a>
+                        </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">1.5M views 1 year ago</p>
+                </div>
+    
+               
+            </div> 
+    
+        </div>
+
+        <div class="vidioall">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="crash.jpg" alt="img" >
+                <div class="overlay"> <p class="imgdis">The absolute top secret love story of a chaebol heiress who made an emergency landing in North Korea because of a paragliding accident and a North Korean special officer who falls in love with her and who is hiding and protecting her.
+
+                </p>
+            </div>
+            </div>
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/crash-landing-on-you/episode-1">Crash landing on you</a>
+                        </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">1.5M views 1 year ago</p>
+                </div>
+            </div> 
+        </div>
+
+        <div class="vidioall">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="vega.png" alt="img" >
+                <div class="overlay"> <p class="imgdis">A mysterious plane crash kills over 200 civilians, including Cha Dal-gun’s (Lee Seung-gi) nephew. Determined to find out the truth behind the accident, Cha Dal-gun embarks on an investigation that leads him to a tangled web of corruption. His life intertwines with Go Hae-ri (Bae Suzy), a covert operative for the National Intelligence Service.
+
+                    Cha Dal Gun becomes an awakened tiger in the face of his nephew’s death in a mysterious plane crash. As an orphan himself, he had raised his nephew singlehandedly in place of his brother who had passed on. Triggered by the large-scale cover-up of the incident, he sets off on a journey to discover the truth.
+                </p>
+            </div>
+            </div>
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/vagabond/episode-1">Vegabond</a>
+                        </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">1.5M views 1 year ago</p>
+                </div>
+            </div> 
+        </div>
+
+
+        <div class="vidioall">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="while.jpg.webp" alt="img" >
+                <div class="overlay"> <p class="imgdis">This is a pre-produced drama. Filming began on 2017-Feb and finished 2017-July. The drama is about a woman, Name Hong Joo (Bae Suzy), who can see unfortunate events in her dreams, and a prosecutor, Jung Jae chan (Lee Jong Suk) who does everything he can to prevent the woman’s dreams from coming true.
+
+                </p>
+            </div>
+            </div>
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/while-you-were-sleeping-2017/episode-1">while-you-were-sleeping</a>
+                        </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">1.5M views 1 year ago</p>
+                </div>
+            </div> 
+        </div>
+
+        <div class="vidioall">
+    
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="hdl4.jpg" alt="img">
+                <div class="overlay"> <p class="imgdis">The Hotel Del Luna, located in Seoul, is not like any other hotel: its client are all ghosts. Jang Man Wol (IU), stuck in the hotel for the past millennium, meets Goo Chan Sung (Yeo Jin Goo), the new manager.
+
+                </p>
+            </div>
+            </div>
+    
+    
+    
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+    
+    
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/hotel-del-luna/episode-1">hotel del luna</a>
+                        </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">2.3M views 1 year ago</p>
+                </div>
+    
+               
+            </div> 
+    
+        </div>
+
+
+
+        <div class="vidioall">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="home.jpg" alt="img" >
+                <div class="overlay"> <p class="imgdis">This drama is remake of 2004 South Korean movie “Mr. Handy, Mr. Hong” Set in the seaside village of Gongjin, it is about the romance between neighborhood handyman Hong Doo Sik (Kim Sun Ho) and pragmatic dentist Yoon Hye Jin (Shin Min Ah).
+                </p>
+            </div>
+            </div>
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/hometown-cha-cha-cha/episode-1">Hometown Cha-Cha-Cha</a>
+                        </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">1.5M views 1 year ago</p>
+                </div>
+            </div> 
+        </div>
+
+        <div class="vidioall">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="bride.jpg" alt="img" >
+                <div class="overlay"> <p class="imgdis">Villagers suffer through a prolong drought. The god of water Ha Baek can allow the rain if a a young woman is sacrificed to him as his bride. For the villagers, So-A decides to become Ha Baek's bride. She finally meets Ha Baek, but he is totally different from what she expected.
+
+                </p>
+            </div>
+            </div>
+            <div> 
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channels4_profile.jpg" alt="">
+                </div>
+                <div class="vid-info">
+                    <p class="title">
+                        <a href="http://fdrama.net/watch-online/hometown-cha-cha-cha/episode-1">Hometown Cha-Cha-Cha</a>
+                        </p>
+                        <p class="author">Episode 16</p>
+                        <p class="views">1.5M views 1 year ago</p>
+                </div>
+            </div> 
+        </div>
+    </div>  
+
+
+<hr>
+    <div class="ending">
+        
+
+    </div>
+</body>
+</html>
+
+
+
+
+
